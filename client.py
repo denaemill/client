@@ -60,12 +60,12 @@ while i < 2:
             if i == 0:
                 i += 1
                 msg = b""
-                sock.send("confirm-accio\r\n".encode())
+                sock.send(b"confirm-accio\r\n")
 
             elif i == 1:
                 i += 1
                 msg = b""
-                sock.send("confirm-accio\r\n".encode())
+                sock.send(b"confirm-accio-again\r\n\r\n")
 
         # Continues to append to the mg string until
         # ... it matches the specified command
