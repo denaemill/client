@@ -50,34 +50,27 @@ while i < 2:
         if len(m) <= 0:
             break
 
-        #msg += m.decode("utf-8")
+        msg += m
 
     #Checks if there was a command recorded
     if len(msg) > 0:
-        if msg == b"accio\r\n":
-            i += 1
-            msg = b""
 
-    # Continues to append to the mg string until
-    # ... it matches the specified command
-    elif len(msg) < len("accio\r\n"):
-        continue
+        if msg.find(b"accio\r\n") >= 0 and msg.find(b"accio\r\n") < len(msg):
 
-    # States that the command sent back does not match
-    # ... the specified command we need, so we end the loop
-    elif len(msg) > len("accio\r\n"):
-        break
+            if i == 0:
+                i += 1
+                msg = b""
+                sock.send("confirm-accio\r\n".encode())
 
+            elif i == 1:
+                i += 1
+                msg = b""
+                sock.send("confirm-accio\r\n".encode())
 
-
-#Send correct confirmations to the server??
-#What are the correct confirmations??
-
-
-#Confirm
-
-
-
+        # Continues to append to the mg string until
+        # ... it matches the specified command
+        elif len(msg) < len("accio\r\n"):
+            continue
 
 
 
