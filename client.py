@@ -22,7 +22,7 @@ try:
     port = int(port)
     if port < 0 and port > 65535:
 
-        sys.stderr.write("OverflowError: getsockaddrarg: port must be 0-65535.")
+        sys.stderr.write("ERROR: (Traceback (most recent call last):File /autograder/submission/client.py")
         sys.exit(1)
 
     else:
@@ -98,5 +98,5 @@ try:
     sock.close()
 
 except socket.error:
-    sys.stderr.write("ERROR: ()Connection is not longer available.")
+    sys.stderr.write("ERROR: ()Connection is no longer available.")
     sys.exit(1)
