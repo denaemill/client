@@ -14,7 +14,7 @@ try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 except socket.error:
-    print("ERROR: ()Socket not created")
+    sys.stderr.write("ERROR: ()Socket not created")
     sys.exit(1)
 
 try:
@@ -24,17 +24,17 @@ try:
         try:
             sock.connect((host, port))
         except socket.error:
-            print("ERROR: ()port must be 0-65535")
+            sys.stderr.write("ERROR: ()port must be 0-65535")
             sys.exit(1)
     else:
         sock.connect((host, port))
 
 except socket.gaierror:
-    print("ERROR: ()Address-related error connecting to server")
+    sys.stderr.write("ERROR: ()Address-related error connecting to server")
     sys.exit(1)
 
 except socket.error:
-    print("ERROR: ()No connection established")
+    sys.stderr.write("ERROR: ()No connection established")
     sys.exit(1)
 
 
@@ -86,7 +86,7 @@ try:
 
             byteSize = 0
             while True:
-                fileIn = f.read(BUFFER_SIZE - byteSize)
+                fileIn = f.read(BUFFER_SIZE)
 
                 if not fileIn:
                     break
@@ -98,5 +98,5 @@ try:
     sock.close()
 
 except socket.error:
-    print("ERROR: ()Connection is not longer available.")
+    sys.stderr.write("ERROR: ()Connection is not longer available.")
     sys.exit(1)
