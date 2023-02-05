@@ -31,7 +31,7 @@ except socket.error:
     sys.exit(1)
 
 
-#Getting two commands from the connection??
+#Getting two commands from the connection
 i = 0
 msg = b""
 while i < 2:
@@ -39,23 +39,22 @@ while i < 2:
     #Recieves commands from the server bit by bit
     while True:
 
-        try:
-            m = sock.recv(1)
-
-        except socket.error:
-            print("ERROR: could not receive data")
-            sys.exit(1)
-
-        # Connection is closed by server
-        if len(m) <= 0:
-            break
+        m = sock.recv(1)
 
         msg += m
+
+        if msg.find(b"\n") != -1:
+            break
+
+        # Connection is closed by server
+        elif len(m) <= 0:
+            break
+
 
     #Checks if there was a command recorded
     if len(msg) > 0:
 
-        if msg.find(b"accio\r\n") >= 0 and msg.find(b"accio\r\n") < len(msg):
+        if msg.find(b"accio\r\n") != -1:
 
             if i == 0:
                 i += 1
@@ -75,7 +74,7 @@ while i < 2:
 
 
 #Transfer the specified file
-if i == 2:
+if i == 5:
 
     #Opens file in binary
     with open(file, "rb") as f:
