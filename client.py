@@ -84,15 +84,13 @@ try:
         # Opens file in binary
         with open(file, "rb") as f:
 
-            byteSize = 0
             while True:
                 fileIn = f.read(BUFFER_SIZE)
 
                 if not fileIn:
                     break
 
-                temp = sock.send(fileIn)
-                byteSize += temp
+                sock.send(fileIn)
 
     # Ending the program
     sock.close()
