@@ -21,12 +21,12 @@ try:
     sock.settimeout(10)  # Setting timeouts for the code
     port = int(port)
     if port < 0 and port > 65535:
-        try:
-            sock.connect((host, port))
-        except socket.error:
-            sys.stderr.write("ERROR: ()port must be 0-65535")
-            sys.exit(1)
+
+        sys.stderr.write("OverflowError: getsockaddrarg: port must be 0-65535.")
+        sys.exit(1)
+
     else:
+
         sock.connect((host, port))
 
 except socket.gaierror:
